@@ -15,7 +15,10 @@ const routes: Routes = [
                         path: '',
                         loadChildren: '../home/home.module#HomeModule'
                     }
-                ]
+                ],
+                data: {
+                    title: '首页'
+                }
             },
             // {
             //     path: 'schedule',
@@ -45,7 +48,10 @@ const routes: Routes = [
                         path: 'speaker-details/:speakerId',
                         loadChildren: '../speaker-detail/speaker-detail.module#SpeakerDetailModule'
                     }
-                ]
+                ],
+                data: {
+                    title: 'speaker'
+                }
             },
             {
                 path: 'map',
@@ -54,7 +60,10 @@ const routes: Routes = [
                         path: '',
                         loadChildren: '../map/map.module#MapModule'
                     }
-                ]
+                ],
+                data: {
+                    title: 'map'
+                }
             },
             {
                 path: 'about',
@@ -63,7 +72,10 @@ const routes: Routes = [
                         path: '',
                         loadChildren: '../about/about.module#AboutModule'
                     }
-                ]
+                ],
+                data: {
+                    title: 'about'
+                }
             },
             {
                 path: '**',
@@ -77,4 +89,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class TabsRoutingModule { }
+export class TabsRoutingModule {}

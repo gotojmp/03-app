@@ -13,4 +13,4 @@ import { TabsRoutingModule } from './tabs-routing.module';
     ],
     declarations: [Tabs]
 })
-export class TabsModule { }
+export class TabsModule {}

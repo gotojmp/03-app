@@ -5,24 +5,39 @@ import { CheckTutorial } from './providers/check-tutorial.service';
 const routes: Routes = [
     {
         path: 'account',
-        loadChildren: './pages/account/account.module#AccountModule'
+        loadChildren: './pages/account/account.module#AccountModule',
+        data: {
+            title: 'account'
+        }
     },
     {
         path: 'support',
-        loadChildren: './pages/support/support.module#SupportModule'
+        loadChildren: './pages/support/support.module#SupportModule',
+        data: {
+            title: 'support'
+        }
     },
     {
         path: 'login',
-        loadChildren: './pages/login/login.module#LoginModule'
+        loadChildren: './pages/login/login.module#LoginModule',
+        data: {
+            title: 'login'
+        }
     },
     {
         path: 'signup',
-        loadChildren: './pages/signup/signup.module#SignUpModule'
+        loadChildren: './pages/signup/signup.module#SignUpModule',
+        data: {
+            title: 'signup'
+        }
     },
     {
         path: 'tutorial',
         loadChildren: './pages/tutorial/tutorial.module#TutorialModule',
-        canLoad: [CheckTutorial]
+        canLoad: [CheckTutorial],
+        data: {
+            title: 'tutorial'
+        }
     },
     {
         path: 'tabs',
