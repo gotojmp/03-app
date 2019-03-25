@@ -13,18 +13,18 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    IonicModule.forRoot(),
-    IonicStorageModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production
-    })
-  ],
-  declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production
+        })
+    ],
+    declarations: [AppComponent],
+    providers: [InAppBrowser, SplashScreen, StatusBar],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

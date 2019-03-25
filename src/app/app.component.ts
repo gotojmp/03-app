@@ -8,96 +8,101 @@ import { Storage } from '@ionic/storage';
 import { UserData } from './providers/user-data';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  appPages = [
-    {
-      title: 'Schedule',
-      url: '/app/tabs/schedule',
-      icon: 'calendar'
-    },
-    {
-      title: 'Speakers',
-      url: '/app/tabs/speakers',
-      icon: 'contacts'
-    },
-    {
-      title: 'Map',
-      url: '/app/tabs/map',
-      icon: 'map'
-    },
-    {
-      title: 'About',
-      url: '/app/tabs/about',
-      icon: 'information-circle'
+    appPages = [
+        {
+            title: 'Home',
+            url: '/tabs/home',
+            icon: 'home'
+        },
+        {
+            title: 'Schedule',
+            url: '/tabs/schedule',
+            icon: 'calendar'
+        },
+        {
+            title: 'Speakers',
+            url: '/tabs/speakers',
+            icon: 'contacts'
+        },
+        {
+            title: 'Map',
+            url: '/tabs/map',
+            icon: 'map'
+        },
+        {
+            title: 'About',
+            url: '/tabs/about',
+            icon: 'information-circle'
+        }
+    ];
+    loggedIn = false;
+
+    constructor(
+        private events: Events,
+        private menu: MenuController,
+        private platform: Platform,
+        private router: Router,
+        private splashScreen: SplashScreen,
+        private statusBar: StatusBar,
+        private storage: Storage,
+        private userData: UserData
+    ) {
+        this.initializeApp();
     }
-  ];
-  loggedIn = false;
 
-  constructor(
-    private events: Events,
-    private menu: MenuController,
-    private platform: Platform,
-    private router: Router,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private storage: Storage,
-    private userData: UserData
-  ) {
-    this.initializeApp();
-  }
+    ngOnInit() {
+        this.checkLoginStatus();
+        this.listenForLoginEvents();
+    }
 
-  ngOnInit() {
-    this.checkLoginStatus();
-    this.listenForLoginEvents();
-  }
+    initializeApp() {
+        this.platform.ready().then(() => {
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+        });
+    }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
+    checkLoginStatus() {
+        return this.userData.isLoggedIn().then(loggedIn => {
+            return this.updateLoggedInStatus(loggedIn);
+        });
+    }
 
-  checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
-      return this.updateLoggedInStatus(loggedIn);
-    });
-  }
+    updateLoggedInStatus(loggedIn: boolean) {
+        setTimeout(() => {
+            this.loggedIn = loggedIn;
+        }, 300);
+    }
 
-  updateLoggedInStatus(loggedIn: boolean) {
-    setTimeout(() => {
-      this.loggedIn = loggedIn;
-    }, 300);
-  }
+    listenForLoginEvents() {
+        this.events.subscribe('user:login', () => {
+            this.updateLoggedInStatus(true);
+        });
 
-  listenForLoginEvents() {
-    this.events.subscribe('user:login', () => {
-      this.updateLoggedInStatus(true);
-    });
+        this.events.subscribe('user:signup', () => {
+            this.updateLoggedInStatus(true);
+        });
 
-    this.events.subscribe('user:signup', () => {
-      this.updateLoggedInStatus(true);
-    });
+        this.events.subscribe('user:logout', () => {
+            this.updateLoggedInStatus(false);
+        });
+    }
 
-    this.events.subscribe('user:logout', () => {
-      this.updateLoggedInStatus(false);
-    });
-  }
+    logout() {
+        this.userData.logout().then(() => {
+            return this.router.navigateByUrl('/');
+        });
+    }
 
-  logout() {
-    this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
-    });
-  }
-
-  openTutorial() {
-    this.menu.enable(false);
-    this.storage.set('ion_did_tutorial', false);
-    this.router.navigateByUrl('/tutorial');
-  }
+    openTutorial() {
+        this.menu.enable(false);
+        this.storage.set('ion_did_tutorial', false);
+        this.router.navigateByUrl('/tutorial');
+    }
 }
