@@ -17,3 +17,24 @@ $categories: (
     padding-left: 10px;
   }
 }
+
+.shortcuts>ion-row>ion-col {
+    text-align: center!important;
+    ion-fab-button {
+        margin-left: auto!important;
+        margin-right: auto!important;
+    }
+}
+
+.item-list>ion-row>ion-col {
+    ion-card {
+        margin: 0!important;
+        ion-card-header {
+            color: #333;
+            padding: 10px!important;
+        }
+        ion-row>ion-col {
+            padding: 10px!important;
+        }
+    }
+}
