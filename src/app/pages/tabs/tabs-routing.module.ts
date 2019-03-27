@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Tabs } from './tabs';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -17,22 +16,34 @@ const routes: Routes = [
                     }
                 ],
                 data: {
-                    title: '首页'
+                    title: 'Home'
                 }
             },
-            // {
-            //     path: 'schedule',
-            //     children: [
-            //         {
-            //             path: '',
-            //             component: SchedulePage,
-            //         },
-            //         {
-            //             path: 'session/:sessionId',
-            //             loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
-            //         }
-            //     ]
-            // },
+            {
+                path: 'categories',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: '../categories/categories.module#CategoriesModule'
+                    }
+                ],
+                data: {
+                    title: 'Categories'
+                }
+            },
+            {
+                path: 'schedule',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: '../schedule/schedule.module#ScheduleModule'
+                    },
+                    {
+                        path: 'session/:sessionId',
+                        loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
+                    }
+                ]
+            },
             {
                 path: 'speakers',
                 children: [

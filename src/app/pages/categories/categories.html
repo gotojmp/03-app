@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-searchbar [(ngModel)]="queryText" (ionChange)="updateSchedule()" placeholder="Search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content slots="fixed" scrollY="false">
+  <ion-grid class="categories-box">
+      <ion-row align-items-stretch>
+          <ion-col size="3" class="categories-left">
+              <ion-content>
+                  <ion-segment [(ngModel)]="mainCategory" color="light">
+                      <ion-segment-button *ngFor="let category of categories" value="{{category.id}}">
+                          <ion-label>{{category.name}}</ion-label>
+                      </ion-segment-button>
+                  </ion-segment>
+              </ion-content>
+          </ion-col>
+          <ion-col size="9" class="categories-right">
+              <ion-content>
+                  <div *ngFor="let category of categories">
+                      <div *ngIf="mainCategory == category.id">
+                          {{category.name}}
+                      </div>
+                  </div>
+              </ion-content>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

@@ -8,6 +8,6 @@ export class Tabs {
     constructor(private router: Router) {}
 
     ionViewWillEnter() {
-        this.router.navigateByUrl('/tabs/home');
+        // this.router.navigateByUrl('/tabs/home');
     }
 }
