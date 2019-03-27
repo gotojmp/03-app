@@ -45,33 +45,33 @@ export class CategoriesPage implements OnInit {
             {
                 id: 1,
                 name: 'Meat',
-                son: []
+                sons: []
             },
             {
                 id: 2,
                 name: 'Fruit',
-                son: []
+                sons: []
             },
             {
                 id: 3,
                 name: 'Seafood',
-                son: []
+                sons: []
             },
             {
                 id: 4,
                 name: 'Rice',
-                son: []
+                sons: []
             },
             {
                 id: 5,
                 name: 'Snack',
-                son: []
+                sons: []
             }
         ];
         this.mainCategory = 1;
         this.confData.getSpeakers().subscribe((speakers: any[]) => {
             this.categories.forEach(group => {
-                group.son = speakers;
+                group.sons = speakers;
             });
         });
     }
